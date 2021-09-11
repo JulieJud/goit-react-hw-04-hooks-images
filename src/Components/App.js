@@ -19,6 +19,7 @@ export class App extends Component {
   async componentDidUpdate(_, prevState) {
     if (prevState.imageName !== this.state.imageName) {
       const images = await fetchImages(this.state.imageName);
+
       this.setState({ images });
     }
   }
