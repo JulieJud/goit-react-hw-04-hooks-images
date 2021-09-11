@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import SearchBar from './Searchbar/Searchbar';
 import fetchImages from './Service/SErvice';
+import ImageGallery from './ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {
@@ -25,8 +26,15 @@ export class App extends Component {
   render() {
     return (
       <div>
-        {' '}
-        <SearchBar onSearch={this.handleFormSubmit} />{' '}
+        <SearchBar onSearch={this.handleFormSubmit} />
+        {this.state.images.length < 1 && (
+          <alert>
+            <h2>The gallery is empty</h2>
+            <p>Use search field!</p>
+          </alert>
+        )}
+
+        <ImageGallery images={this.state.images} />
       </div>
     );
   }
