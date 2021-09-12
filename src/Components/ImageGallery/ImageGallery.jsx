@@ -4,8 +4,8 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 const ImageGallery = ({ images }) => {
   return (
     <ul>
-      {images.map(image => (
-        <ImageGalleryItem key={image.id} image={image}></ImageGalleryItem>
+      {images.map((image, id) => (
+        <ImageGalleryItem key={id} image={image}></ImageGalleryItem>
       ))}
     </ul>
   );
