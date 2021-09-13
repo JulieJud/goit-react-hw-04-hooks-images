@@ -5,13 +5,13 @@ import fetchImages from './Service/SErvice';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ButtonLoadMore from './Button/Button';
 import Spinner from './Loader/Loader';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 export class App extends Component {
   state = {
     imageName: null,
     images: [],
-    reqStatus: 'idle',
+    status: 'idle',
     page: 1,
     error: null,
   };
@@ -35,7 +35,7 @@ export class App extends Component {
         this.setState({ status: 'resolved' });
 
         if (imageName.trim() === '' || images.length === 0) {
-          return alert(`no picture with name ${imageName}`);
+          return toast.success(`no picture with name ${imageName}`);
         }
 
         this.setState({
@@ -48,7 +48,7 @@ export class App extends Component {
         });
       } catch (error) {
         this.setState({ status: 'rejected' });
-        return alert('smt going wrong');
+        return toast.error('smt going wrong');
       }
     }
   }
@@ -63,18 +63,19 @@ export class App extends Component {
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
+        {this.state.status === 'pending' && <Spinner />}
         {this.state.images.length < 1 && (
           <>
             <h2>The gallery is empty</h2>
             <p>Use search field!</p>
           </>
         )}
-        {this.state.reqStatus === 'pending' && <Spinner />}
 
         <ImageGallery images={this.state.images} />
         {this.state.images.length !== 0 && (
           <ButtonLoadMore onClick={this.handleLoadMore} />
         )}
+        <Toaster />
       </div>
     );
   }
