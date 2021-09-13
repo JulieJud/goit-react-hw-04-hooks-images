@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+.titleName {
+  color: blue;
+  text-align: center;
+}

@@ -1,19 +1,21 @@
+import s from './SearchBar.module.css';
+
 const SearchBar = ({ onSearch }) => {
   return (
-    <header className="Searchbar">
+    <header className={s.Searchbar}>
       <form
-        className="SearchForm"
+        className={s.SearchForm}
         onSubmit={e => {
           e.preventDefault();
           onSearch(e.target.elements.imageName.value);
         }}
       >
-        <button type="submit" className="SearchForm-button">
-          <span className="SearchForm-button-label">Search</span>
+        <button type="submit" className={s.SearchForm_button}>
+          <span className={s.SearchForm_button_label}>Search</span>
         </button>
 
         <input
-          className="SearchForm-input"
+          className={s.SearchForm_input}
           type="text"
           autoComplete="off"
           autoFocus

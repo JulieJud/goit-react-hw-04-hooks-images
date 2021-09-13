@@ -35,7 +35,7 @@ export class App extends Component {
         this.setState({ status: 'resolved' });
 
         if (imageName.trim() === '' || images.length === 0) {
-          return toast.success(`no picture with name ${imageName}`);
+          return toast.error(`no picture with name ${imageName}`);
         }
 
         this.setState({
@@ -66,8 +66,9 @@ export class App extends Component {
         {this.state.status === 'pending' && <Spinner />}
         {this.state.images.length < 1 && (
           <>
-            <h2>The gallery is empty</h2>
-            <p>Use search field!</p>
+            <h2 className="titleName">
+              The gallery is empty! Use search field!
+            </h2>
           </>
         )}
 
