@@ -4,6 +4,8 @@ import SearchBar from './Searchbar/Searchbar';
 import fetchImages from './Service/SErvice';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ButtonLoadMore from './Button/Button';
+import Spinner from './Loader/Loader';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 export class App extends Component {
   state = {
@@ -15,14 +17,14 @@ export class App extends Component {
   };
 
   handleFormSubmit = imageName => {
-    this.setState({ imageName });
+    this.setState({ imageName, page: 1, images: [] });
   };
 
   handleLoadMore = () => {
     this.setState(p => ({ page: p.page + 1 }));
   };
 
-  async componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(_, prevState) {
     const { imageName, page } = this.state;
 
     if (prevState.imageName !== imageName || prevState.page !== page) {
@@ -33,16 +35,20 @@ export class App extends Component {
         this.setState({ status: 'resolved' });
 
         if (imageName.trim() === '' || images.length === 0) {
-          return `no picture with name ${imageName}`;
+          return alert(`no picture with name ${imageName}`);
         }
 
-        this.setState({ images: [...this.state.images, ...images] });
+        this.setState({
+          images: [...this.state.images, ...images],
+        });
+
         window.scrollTo({
           top: document.documentElement.scrollHeight,
           behavior: 'smooth',
         });
       } catch (error) {
-        this.setState({ status: 'rejected' })('smt going wrong');
+        this.setState({ status: 'rejected' });
+        return alert('smt going wrong');
       }
     }
   }
@@ -63,6 +69,7 @@ export class App extends Component {
             <p>Use search field!</p>
           </>
         )}
+        {this.state.reqStatus === 'pending' && <Spinner />}
 
         <ImageGallery images={this.state.images} />
         {this.state.images.length !== 0 && (

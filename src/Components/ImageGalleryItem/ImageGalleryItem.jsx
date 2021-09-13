@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import s from './ImageGalleryItem.module.css';
 const ImageGalleryItem = ({ image }) => {
   return (
-    <li className="ImageGalleryItem">
+    <li className={s.ImageGalleryItem}>
       <img
         src={image.webformatURL}
         alt={image.tags}
-        className="ImageGalleryItem-image"
+        className={s.ImageGalleryItem_image}
       />
     </li>
   );
