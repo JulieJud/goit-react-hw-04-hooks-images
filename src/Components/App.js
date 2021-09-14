@@ -6,10 +6,12 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import ButtonLoadMore from './Button/Button';
 import Spinner from './Loader/Loader';
 import toast, { Toaster } from 'react-hot-toast';
+import Modal from './Modal/Modal';
 
 export class App extends Component {
   state = {
     imageName: null,
+    selectedImage: null,
     images: [],
     status: 'idle',
     page: 1,
@@ -59,12 +61,16 @@ export class App extends Component {
       behavior: 'smooth',
     });
   };
+
+  handleSelectedImage = imageURL => this.setState({ selectedImage: imageURL });
+
   render() {
+    const { images, status, selectedImage } = this.state;
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
-        {this.state.status === 'pending' && <Spinner />}
-        {this.state.images.length < 1 && (
+        {status === 'pending' && <Spinner />}
+        {images.length < 1 && (
           <>
             <h2 className="titleName">
               The gallery is empty! Use search field!
@@ -72,11 +78,17 @@ export class App extends Component {
           </>
         )}
 
-        <ImageGallery images={this.state.images} />
-        {this.state.images.length !== 0 && (
+        <ImageGallery images={images} onSelect={this.handleSelectedImage} />
+        {images.length !== 0 && (
           <ButtonLoadMore onClick={this.handleLoadMore} />
         )}
         <Toaster />
+        {selectedImage && (
+          <Modal>
+            {' '}
+            <img src={selectedImage} alt="kartinka" />
+          </Modal>
+        )}
       </div>
     );
   }
