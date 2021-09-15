@@ -11,7 +11,7 @@ import Modal from './Modal/Modal';
 export class App extends Component {
   state = {
     imageName: null,
-    selectedImage: null,
+    //selectedImage: null,
     images: [],
     status: 'idle',
     page: 1,
@@ -71,15 +71,13 @@ export class App extends Component {
   };
 
   toggleModal = () => {
-    this.setState(state => ({
-      showModal: !state.showModal,
-      selectedImage: '',
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
     }));
   };
 
   render() {
-    const { images, status, largeImageURL, imgTags, showModal } = this.state;
-
+    const { images, status, showModal, largeImageURL, imgTags } = this.state;
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
@@ -92,7 +90,10 @@ export class App extends Component {
           </>
         )}
 
-        <ImageGallery images={images} onSelect={this.handleSelectedImage} />
+        <ImageGallery
+          images={images}
+          handleSelectedImage={this.handleSelectedImage}
+        />
         {images.length !== 0 && (
           <ButtonLoadMore onClick={this.handleLoadMore} />
         )}
