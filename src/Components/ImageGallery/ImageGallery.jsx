@@ -9,7 +9,7 @@ const ImageGallery = ({ images, onSelect }) => {
         <ImageGalleryItem
           key={id}
           image={image}
-          onClick={() => onSelect(image.largeImageUrl)}
+          onClick={() => onSelect(image)}
         />
       ))}
     </ul>

@@ -16,6 +16,7 @@ export class App extends Component {
     status: 'idle',
     page: 1,
     error: null,
+    showModal: true,
   };
 
   handleFormSubmit = imageName => {
@@ -62,10 +63,22 @@ export class App extends Component {
     });
   };
 
-  handleSelectedImage = imageURL => this.setState({ selectedImage: imageURL });
+  handleSelectedImage = largeImageUrl => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal,
+      selectedImg: largeImageUrl,
+    }));
+  };
+
+  toggleModal = () => {
+    this.setState(state => ({
+      showModal: !state.showModal,
+      selectedImage: '',
+    }));
+  };
 
   render() {
-    const { images, status, selectedImage } = this.state;
+    const { images, status, selectedImage, showModal } = this.state;
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
@@ -83,11 +96,12 @@ export class App extends Component {
           <ButtonLoadMore onClick={this.handleLoadMore} />
         )}
         <Toaster />
-        {selectedImage && (
-          <Modal>
-            {' '}
-            <img src={selectedImage} alt="kartinka" />
-          </Modal>
+        {showModal && (
+          <Modal
+            src={selectedImage.largeImageURL}
+            alt={selectedImage.tags}
+            onClose={this.toggleModal}
+          />
         )}
       </div>
     );
