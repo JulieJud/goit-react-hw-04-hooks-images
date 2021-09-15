@@ -66,7 +66,7 @@ export class App extends Component {
   handleSelectedImage = largeImageUrl => {
     this.setState(prevState => ({
       showModal: !prevState.showModal,
-      selectedImg: largeImageUrl,
+      selectedImage: largeImageUrl,
     }));
   };
 
