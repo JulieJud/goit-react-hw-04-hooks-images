@@ -11,7 +11,6 @@ import Modal from './Modal/Modal';
 export class App extends Component {
   state = {
     imageName: null,
-    //selectedImage: null,
     images: [],
     status: 'idle',
     page: 1,
