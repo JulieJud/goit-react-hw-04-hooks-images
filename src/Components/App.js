@@ -17,6 +17,8 @@ export class App extends Component {
     page: 1,
     error: null,
     showModal: true,
+    largeImageURL: '',
+    imgTags: '',
   };
 
   handleFormSubmit = imageName => {
@@ -63,11 +65,9 @@ export class App extends Component {
     });
   };
 
-  handleSelectedImage = largeImageUrl => {
-    this.setState(prevState => ({
-      showModal: !prevState.showModal,
-      selectedImage: largeImageUrl,
-    }));
+  handleSelectedImage = (largeImageURL, imgTags) => {
+    this.setState({ largeImageURL, imgTags });
+    this.toggleModal();
   };
 
   toggleModal = () => {
@@ -78,7 +78,8 @@ export class App extends Component {
   };
 
   render() {
-    const { images, status, selectedImage, showModal } = this.state;
+    const { images, status, largeImageURL, imgTags, showModal } = this.state;
+
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
@@ -97,11 +98,9 @@ export class App extends Component {
         )}
         <Toaster />
         {showModal && (
-          <Modal
-            src={selectedImage.largeImageURL}
-            alt={selectedImage.tags}
-            onClose={this.toggleModal}
-          />
+          <Modal onClose={this.toggleModal}>
+            <img src={largeImageURL} alt={imgTags} />
+          </Modal>
         )}
       </div>
     );
