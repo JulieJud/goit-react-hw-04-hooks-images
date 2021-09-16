@@ -15,7 +15,7 @@ export class App extends Component {
     status: 'idle',
     page: 1,
     error: null,
-    showModal: true,
+    showModal: false,
     largeImageURL: '',
     imgTags: '',
   };
