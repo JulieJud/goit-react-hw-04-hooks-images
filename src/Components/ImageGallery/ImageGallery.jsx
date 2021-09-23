@@ -7,6 +7,7 @@ const ImageGallery = ({ images, handleSelectedImage }) => {
     <ul className={s.ImageGallery}>
       {images.map(({ id, webformatURL, largeImageURL, tags }) => (
         <ImageGalleryItem
+          key={id}
           webformatURL={webformatURL}
           largeImageURL={largeImageURL}
           tags={tags}

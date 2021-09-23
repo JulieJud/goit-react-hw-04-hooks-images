@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import SearchBar from './Searchbar/Searchbar';
-import fetchImages from './Service/SErvice';
+import fetchImages from '../services/imagesApi';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ButtonLoadMore from './Button/Button';
 import Spinner from './Loader/Loader';
@@ -14,7 +14,6 @@ export class App extends Component {
     status: 'idle',
     page: 1,
     error: null,
-    //showModal: false,
     largeImageURL: '',
     imgTags: '',
   };
@@ -61,11 +60,11 @@ export class App extends Component {
   };
 
   closeModal = () => {
-    this.setState({ largeImageURLl: '' });
+    this.setState({ largeImageURL: '' });
   };
 
   render() {
-    const { images, status, showModal, largeImageURL, imgTags } = this.state;
+    const { images, status, largeImageURL, imgTags } = this.state;
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
@@ -87,9 +86,11 @@ export class App extends Component {
         )}
         <Toaster />
         {largeImageURL && (
-          <Modal onClose={this.closeModal}>
-            <img src={largeImageURL} alt={imgTags} />
-          </Modal>
+          <Modal
+            onClose={this.closeModal}
+            largeImageURL={largeImageURL}
+            imgTags={imgTags}
+          />
         )}
       </div>
     );
