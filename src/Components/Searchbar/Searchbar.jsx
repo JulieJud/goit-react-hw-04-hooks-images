@@ -8,6 +8,7 @@ const SearchBar = ({ onSearch }) => {
         onSubmit={e => {
           e.preventDefault();
           onSearch(e.target.elements.imageName.value);
+          e.target.reset();
         }}
       >
         <button type="submit" className={s.SearchForm_button}>
