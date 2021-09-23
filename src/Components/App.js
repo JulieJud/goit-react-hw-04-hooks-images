@@ -1,11 +1,10 @@
 import { Component } from 'react';
-import './App.css';
+import toast, { Toaster } from 'react-hot-toast';
 import SearchBar from './Searchbar/Searchbar';
 import fetchImages from './Service/SErvice';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ButtonLoadMore from './Button/Button';
 import Spinner from './Loader/Loader';
-import toast, { Toaster } from 'react-hot-toast';
 import Modal from './Modal/Modal';
 
 export class App extends Component {
@@ -15,7 +14,7 @@ export class App extends Component {
     status: 'idle',
     page: 1,
     error: null,
-    showModal: false,
+    //showModal: false,
     largeImageURL: '',
     imgTags: '',
   };
@@ -57,22 +56,12 @@ export class App extends Component {
     }
   }
 
-  scrollOnLoadButton = () => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
-  };
-
   handleSelectedImage = (largeImageURL, imgTags) => {
     this.setState({ largeImageURL, imgTags });
-    this.toggleModal();
   };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
+  closeModal = () => {
+    this.setState({ largeImageURLl: '' });
   };
 
   render() {
@@ -97,8 +86,8 @@ export class App extends Component {
           <ButtonLoadMore onClick={this.handleLoadMore} />
         )}
         <Toaster />
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
+        {largeImageURL && (
+          <Modal onClose={this.closeModal}>
             <img src={largeImageURL} alt={imgTags} />
           </Modal>
         )}
