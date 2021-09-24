@@ -28,8 +28,8 @@ class Modal extends Component {
 
   render() {
     return createPortal(
-      <div className={s.Overlay} onClick={this.handleBackdropClick}>
-        <div className={s.Modal}>
+      <div className={s.overlay} onClick={this.handleBackdropClick}>
+        <div className={s.modal}>
           {' '}
           <img src={this.props.largeImageURL} alt={this.props.imgTag} />
         </div>

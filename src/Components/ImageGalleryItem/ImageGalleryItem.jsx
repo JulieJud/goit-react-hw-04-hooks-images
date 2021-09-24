@@ -8,11 +8,11 @@ const ImageGalleryItem = ({
   handleSelectedImage,
 }) => {
   return (
-    <li className={s.ImageGalleryItem}>
+    <li className={s.imageGalleryItem}>
       <img
         src={webformatURL}
         alt={tags}
-        className={s.ImageGalleryItem_image}
+        className={s.imageGalleryItem_image}
         onClick={() => handleSelectedImage(largeImageURL, tags)}
       />
     </li>

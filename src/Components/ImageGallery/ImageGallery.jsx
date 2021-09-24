@@ -4,7 +4,7 @@ import s from './ImageGallery.module.css';
 
 const ImageGallery = ({ images, handleSelectedImage }) => {
   return (
-    <ul className={s.ImageGallery}>
+    <ul className={s.imageGallery}>
       {images.map(({ id, webformatURL, largeImageURL, tags }) => (
         <ImageGalleryItem
           key={id}
