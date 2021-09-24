@@ -51,6 +51,8 @@ export class App extends Component {
       } catch (error) {
         this.setState({ status: 'rejected' });
         return toast.error('smt going wrong');
+      } finally {
+        this.setState({ loader: false });
       }
     }
   }
@@ -68,7 +70,6 @@ export class App extends Component {
     return (
       <div>
         <SearchBar onSearch={this.handleFormSubmit} />
-        {status === 'pending' && <Spinner />}
         {images.length < 1 && (
           <>
             <h2 className="titleName">
@@ -81,9 +82,12 @@ export class App extends Component {
           images={images}
           handleSelectedImage={this.handleSelectedImage}
         />
+        {status === 'pending' && <Spinner />}
+
         {images.length !== 0 && (
           <ButtonLoadMore onClick={this.handleLoadMore} />
         )}
+
         <Toaster />
         {largeImageURL && (
           <Modal
