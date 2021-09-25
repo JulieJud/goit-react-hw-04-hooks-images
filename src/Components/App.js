@@ -14,7 +14,6 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState('idle');
   const [imgTags, setImgTags] = useState('');
-  //const [error, setError] = useState(null)
 
   const handleFormSubmit = imageName => {
     setImageName(imageName);
@@ -60,6 +59,7 @@ export default function App() {
         return toast.error('smt going wrong');
       }
     }
+
     getImage();
   }, [imageName, page]);
 
